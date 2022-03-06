@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/generator/generator.iml" filepath="$PROJECT_DIR$/generator/generator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/mini-xman.iml" filepath="$PROJECT_DIR$/.idea/mini-xman.iml" />
       <module fileurl="file://$PROJECT_DIR$/starter/starter.iml" filepath="$PROJECT_DIR$/starter/starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/userinterface/userinterface.iml" filepath="$PROJECT_DIR$/userinterface/userinterface.iml" />
     </modules>

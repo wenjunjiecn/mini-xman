@@ -65,10 +65,9 @@ public class SequencerGenerator {
         int[] component_indexs = Arrays.asList(input.split(",")).stream().mapToInt(Integer::parseInt).toArray();
 
         for(int i = 0; i < component_indexs.length; ++i) {
-            component_indexs[i] = component_indexs[i]--;
+            component_indexs[i] = component_indexs[i]-1;
         }
 
-        System.out.println(component_indexs);
         initialSeqComposite(name, componentList, component_indexs);
     }
 
@@ -101,7 +100,7 @@ public class SequencerGenerator {
         }
 
         String added_imports = (String)imports.stream().filter(Objects::nonNull).collect(Collectors.joining("\n"));
-        System.out.println(added_code);
+//        System.out.println(added_code);
         GeneratorUtil.replaceFileText(newpath, "//import-slot", added_imports);
         List<String> dependencies = new ArrayList();
 
@@ -111,7 +110,7 @@ public class SequencerGenerator {
         }
 
         String added_dependencies = (String)dependencies.stream().filter(Objects::nonNull).collect(Collectors.joining("\n\t\t"));
-        System.out.println(added_dependencies);
+//        System.out.println(added_dependencies);
         GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "<!--dependency-slot-->", added_dependencies);
         GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "//main-class", "com.junjie.xman.component." + GeneratorUtil.upperFirstCase(name) + "Component");
         System.out.println("The sequencer composite (" + name + ") have been created, please going to " + newpath + " to add your own code.");
