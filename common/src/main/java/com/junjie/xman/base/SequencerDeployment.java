@@ -2,14 +2,18 @@ package com.junjie.xman.base;
 
 import com.junjie.xman.entity.Request;
 import com.junjie.xman.entity.Response;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class SelectorDeployment implements SelectorDeploymentInterface {
-
+/**
+ * @author wenjunjie
+ * @version 1.0
+ */
+public class SequencerDeployment implements SequencerDeploymentInterface{
     public Response run(Request request) {
         return request.toResponse();
     }
@@ -33,8 +37,6 @@ public class SelectorDeployment implements SelectorDeploymentInterface {
                 ObjectInputStream oi = new ObjectInputStream(socket.getInputStream());
                 Request request = (Request)oi.readObject();
                 response = this.run(request);
-                int dest_port = Integer.parseInt(response.getParameterByKey("dest_port"));
-                response = this.connectDestination(request, dest_port);
                 objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 objectOutputStream.writeObject(response);
                 objectOutputStream.flush();
@@ -57,28 +59,29 @@ public class SelectorDeployment implements SelectorDeploymentInterface {
         }
     }
 
-    private Response connectDestination(Request request, int dest_port) throws IOException {
+    public Response connectDestinations(Request request, int[] dest_ports) throws IOException {
         Socket socket = null;
         ObjectOutputStream objectOutputStream = null;
         ObjectInputStream objectInputStream = null;
         Response response = null;
-
-        try {
-            socket = new Socket("0.0.0.0", dest_port);
-            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            objectOutputStream.writeObject(request);
-            objectOutputStream.flush();
-            objectInputStream = new ObjectInputStream(socket.getInputStream());
-            response = (Response)objectInputStream.readObject();
-            System.out.println("The Response from Sevice Selector Connector:");
-            System.out.println(response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            objectOutputStream.close();
-            objectInputStream.close();
-            socket.close();
+        for (int dest_port : dest_ports) {
+            try {
+                socket = new Socket("0.0.0.0", dest_port);
+                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                objectOutputStream.writeObject(request);
+                objectOutputStream.flush();
+                objectInputStream = new ObjectInputStream(socket.getInputStream());
+                response = (Response)objectInputStream.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                objectOutputStream.close();
+                objectInputStream.close();
+                socket.close();
+            }
+            request = response.toRequest();
         }
+
 
         return response;
     }

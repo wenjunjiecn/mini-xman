@@ -26,7 +26,6 @@ public class SequencerDeployGenerator {
         System.out.println("Please enter the component and port you want to connect in sequence,. For example, comp1:12222;comp2:13333");
         String input = scanner.nextLine();
         String[] comps = input.split(";");
-        System.out.println("please enter all the condition, like request.getParameterByKey(\"id\")==\"1\"");
         List<String> ports = new ArrayList();
 
         for(int i = 0; i < comps.length; ++i) {
@@ -39,10 +38,10 @@ public class SequencerDeployGenerator {
         String added_code = (String)ports.get(0);
 
         for(int i = 1; i < ports.size(); ++i) {
-            added_code = added_code + ", " + (String)ports.get(i);
+            added_code = added_code + " , " + (String)ports.get(i);
         }
 
-        added_code = "dest_ports={ " + added_code + "};";
+        added_code = "int[] dest_ports={" + added_code + "};";
         GeneratorUtil.replaceFileText(newpath, "//code-slot", added_code);
     }
 }
