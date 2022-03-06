@@ -10,7 +10,7 @@ import java.io.IOException;
  * @version 1.0
  */
 public interface SequencerDeploymentInterface {
-    Response run(Request request);
+    Response run(Request request) throws IOException;
 
     void start_by_net(int port) throws IOException, ClassNotFoundException;
 }

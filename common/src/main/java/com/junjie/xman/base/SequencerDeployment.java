@@ -14,7 +14,7 @@ import java.net.Socket;
  * @version 1.0
  */
 public class SequencerDeployment implements SequencerDeploymentInterface{
-    public Response run(Request request) {
+    public Response run(Request request) throws IOException {
         return request.toResponse();
     }
 
@@ -36,7 +36,7 @@ public class SequencerDeployment implements SequencerDeploymentInterface{
                 socket = server.accept();
                 ObjectInputStream oi = new ObjectInputStream(socket.getInputStream());
                 Request request = (Request)oi.readObject();
-                response = this.run(request);
+                response = run(request);
                 objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 objectOutputStream.writeObject(response);
                 objectOutputStream.flush();

@@ -3,16 +3,16 @@ package com.junjie.xman.component;
 import com.junjie.xman.base.SequencerDeployment;
 import com.junjie.xman.entity.Request;
 import com.junjie.xman.entity.Response;
-//import-slot
+import java.io.IOException;
 /**
  * @author wenjunjie
  * @version 1.0
  */
 public class MySequencerDeployment extends SequencerDeployment {
     @Override
-    public Response run(Request request) {
+    public Response run(Request request) throws IOException{
         //code-slot
-        connectDestinations(request,dest_ports);
+        Response response = connectDestinations(request, dest_ports);
         return response;
     }
 
