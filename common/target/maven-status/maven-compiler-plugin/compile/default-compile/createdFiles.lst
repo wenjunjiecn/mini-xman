@@ -1,0 +1,10 @@
+com\junjie\xman\entity\Response.class
+com\junjie\xman\base\SelectorDeployment.class
+com\junjie\xman\base\Component.class
+com\junjie\xman\base\ComponentInterface.class
+com\junjie\xman\base\SelectorDeploymentInterface.class
+com\junjie\xman\util\CMDUtil.class
+com\junjie\xman\base\Sequencer.class
+com\junjie\xman\base\SequencerInterface.class
+com\junjie\xman\entity\Request.class
+com\junjie\xman\util\GeneratorUtil.class
