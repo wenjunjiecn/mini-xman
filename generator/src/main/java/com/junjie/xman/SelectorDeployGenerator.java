@@ -36,9 +36,9 @@ public class SelectorDeployGenerator {
 
     public static void initial() throws ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter the selector name:");
+        System.out.println("Please enter the deployment phase selector name:");
         String name = scanner.nextLine();
-        System.out.println("The seletor in deployment phase (" + name + ") is creating....");
+        System.out.println("The deployment phase selector (" + name + ") is creating....");
         GeneratorUtil.copyDir("templateSelectorDeployment", name);
         Path filepath = Paths.get(System.getProperty("user.dir"), name, "src/main/java/com/junjie/xman/component/MySelectorDeployment.java");
         File file = new File(String.valueOf(filepath));

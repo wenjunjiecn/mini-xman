@@ -47,7 +47,7 @@ public class SequencerGenerator {
 
     public static void depositeSequencerComposite() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter the new component name:");
+        System.out.println("Please enter the name of the design phase sequencer you need to deposit:");
         String name = scanner.nextLine();
         String output = CMDUtil.excuteCMDCommand("cmd /c start deposit.bat " + name);
         System.out.println(output);
@@ -56,11 +56,11 @@ public class SequencerGenerator {
 
     public static void initialNewSequencerComposite() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter the new component name:");
+        System.out.println("Please enter the name of the design phase sequencer:");
         String name = scanner.nextLine();
-        System.out.println("the following list is the component you can use:");
+        System.out.println("The following list is the components you can use:");
         List<String> componentList = getComponentList();
-        System.out.println("Select the components you want to connect in order and separate them with commas. For example 1,2,3");
+        System.out.println("Please enter the components you want to connect in order (enter the serial numbers according to the list above). For example 1,2,3");
         String input = scanner.nextLine();
         int[] component_indexs = Arrays.asList(input.split(",")).stream().mapToInt(Integer::parseInt).toArray();
 

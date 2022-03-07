@@ -23,6 +23,7 @@ public class UserInterface {
                 System.out.println("4.create sequencer composite");
                 System.out.println("5.deposite sequencer composite to the repository");
                 System.out.println("6.go to deployment phase");
+                System.out.println("-1.Exit");
                 String input = scanner.nextLine();
                 int i = Integer.parseInt(input);
                 if (i == 1) {
@@ -56,6 +57,7 @@ public class UserInterface {
             System.out.println("2.create sequencer");
             System.out.println("3.start runing component");
             System.out.println("4.run the system");
+            System.out.println("-1.Back to previous menu");
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             int i = Integer.parseInt(input);

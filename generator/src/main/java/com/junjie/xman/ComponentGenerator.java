@@ -35,7 +35,7 @@ public class ComponentGenerator {
 
     public static void depositeComponent() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter the new component name:");
+        System.out.println("Please enter the name of the component you need to deposit:");
         String name = scanner.nextLine();
         String output = CMDUtil.excuteCMDCommand("deposit.bat " + name);
         System.out.println(output);
@@ -59,6 +59,6 @@ public class ComponentGenerator {
         GeneratorUtil.replaceFileText(newpath, "MyComponent", GeneratorUtil.upperFirstCase(name) + "Component");
         GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "templateComponent", name);
         GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "//main-class", "com.junjie.xman.component." + GeneratorUtil.upperFirstCase(name) + "Component");
-        System.out.println("The component (" + name + ") have been created, please going to " + newpath + " to add your own code.");
+        System.out.println("The component (" + name + ") have been created, Please go to the file under this path and add your own business code: " + newpath );
     }
 }

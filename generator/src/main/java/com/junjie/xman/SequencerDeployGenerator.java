@@ -12,9 +12,9 @@ public class SequencerDeployGenerator {
 
     public static void initial() throws ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter the sequencer name:");
+        System.out.println("Please enter the name of the deployment phase sequencer:");
         String name = scanner.nextLine();
-        System.out.println("The seletor in deployment phase (" + name + ") is creating....");
+        System.out.println("The deployment phase sequencer(" + name + ") is creating....");
         GeneratorUtil.copyDir("templateSequencerDeployment", name);
         Path filepath = Paths.get(System.getProperty("user.dir"), name, "src/main/java/com/junjie/xman/component/MySequencerDeployment.java");
         File file = new File(String.valueOf(filepath));
@@ -23,7 +23,7 @@ public class SequencerDeployGenerator {
         GeneratorUtil.replaceFileText(newpath, "MySequencerDeployment", GeneratorUtil.upperFirstCase(name) + "Component");
         GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "templateSequencerDeployment", name);
         GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "//main-class", "com.junjie.xman.component." + GeneratorUtil.upperFirstCase(name) + "Component");
-        System.out.println("Please enter the component and port you want to connect in sequence,. For example, comp1:12222;comp2:13333");
+        System.out.println("Please enter the component and port you want to connect in sequence(These component will be connected in order to execute). For example, comp1:12222;comp2:13333");
         String input = scanner.nextLine();
         String[] comps = input.split(";");
         List<String> ports = new ArrayList();
