@@ -11,10 +11,10 @@ import java.util.Scanner;
 public class MainStarter {
 
     public static void main(String[] args) throws IOException {
-        System.out.println("please enter the main component/composite and make sure each related components have been started:");
+        System.out.println("You enter the name of the topmost module, please note that this is a tool to assist the system to start running and is not included in the model itself:");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
-        System.out.println("please enter the port:");
+        System.out.println("You enter the port of the uppermost connector/component:");
         int port = Integer.parseInt(scanner.nextLine());
         Request request = new Request();
         Socket socket = null;

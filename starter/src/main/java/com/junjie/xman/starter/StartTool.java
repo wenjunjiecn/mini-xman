@@ -10,10 +10,10 @@ public class StartTool {
 
     public static void start_process() throws Exception {
         GeneratorUtil.getComponentList();
-        System.out.println("please choose the component in the repository");
+        System.out.println("please enter the component name(The list above shows only the components in the repository, but you can run the connectors defined during the deployment phase by simply entering the name):");
         Scanner scanner = new Scanner(System.in);
         final String name = scanner.nextLine();
-        System.out.println("please enter the port:");
+        System.out.println("Please enter the port you want the part to run on:");
         int port = Integer.parseInt(scanner.nextLine());
         String match_content = GeneratorUtil.matchFileContent(Paths.get(name, "pom.xml").toString(), "<argument>\\d*</argument>");
         GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), match_content, "<argument>" + port + "</argument>");

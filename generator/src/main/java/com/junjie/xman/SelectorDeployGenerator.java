@@ -50,7 +50,7 @@ public class SelectorDeployGenerator {
         System.out.println("Please enter the component name and port you want to use for the selection. For example, comp1:12222;comp2:13333");
         String input = scanner.nextLine();
         String[] comps = input.split(";");
-        System.out.println("please enter all the condition, like request.getParameterByKey(\"id\")==\"1\"");
+        System.out.println("please enter all the condition, like \"1\".equals(request.getParameterByKey(\"bankid\"))");
         List<String> added_condition_code = new ArrayList();
 
         for(int i = 0; i < comps.length; ++i) {
