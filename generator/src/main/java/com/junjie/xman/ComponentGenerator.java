@@ -4,6 +4,7 @@ import com.junjie.xman.util.CMDUtil;
 import com.junjie.xman.util.GeneratorUtil;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -40,6 +41,11 @@ public class ComponentGenerator {
         String output = CMDUtil.excuteCMDCommand("deposit.bat " + name);
         System.out.println(output);
         GeneratorUtil.addComponentToFilelist(name);
+        try {
+            GeneratorUtil.stripDuplicatesFromFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void initialNewComponent() {

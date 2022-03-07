@@ -1,21 +1,9 @@
 package com.junjie.xman.util;
 
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 /**
  * @author wenjunjie
@@ -191,6 +179,23 @@ public class GeneratorUtil {
             br.close();
             return sb.toString().trim();
         }
+    }
+
+    public static void stripDuplicatesFromFile() throws IOException {
+        String filename="list.resp";
+        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        Set<String> lines = new HashSet<String>(); // maybe should be bigger
+        String line;
+        while ((line = reader.readLine()) != null) {
+            lines.add(line);
+        }
+        reader.close();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+        for (String unique : lines) {
+            writer.write(unique);
+            writer.newLine();
+        }
+        writer.close();
     }
 }
 
