@@ -1,1 +1,1 @@
-cd %1 && mvn install
+cd ./repository/%1 && mvn install

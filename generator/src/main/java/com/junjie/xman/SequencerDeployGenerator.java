@@ -10,19 +10,19 @@ import java.util.Scanner;
 
 public class SequencerDeployGenerator {
 
-    public static void initial() throws ClassNotFoundException {
+    public static void initial() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the name of the deployment phase sequencer:");
         String name = scanner.nextLine();
         System.out.println("The deployment phase sequencer(" + name + ") is creating....");
-        GeneratorUtil.copyDir("templateSequencerDeployment", name);
-        Path filepath = Paths.get(System.getProperty("user.dir"), name, "src/main/java/com/junjie/xman/component/MySequencerDeployment.java");
+        GeneratorUtil.copyDir("./templates/templateSequencerDeployment", Paths.get("repository",name).toString());
+        Path filepath = Paths.get(System.getProperty("user.dir"), "repository",name, "src/main/java/com/junjie/xman/component/MySequencerDeployment.java");
         File file = new File(String.valueOf(filepath));
-        Path newpath = Paths.get(System.getProperty("user.dir"), name, "src/main/java/com/junjie/xman/component", GeneratorUtil.upperFirstCase(name) + "Component.java");
+        Path newpath = Paths.get(System.getProperty("user.dir"),"repository", name, "src/main/java/com/junjie/xman/component", GeneratorUtil.upperFirstCase(name) + "Component.java");
         file.renameTo(new File(String.valueOf(newpath)));
         GeneratorUtil.replaceFileText(newpath, "MySequencerDeployment", GeneratorUtil.upperFirstCase(name) + "Component");
-        GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "templateSequencerDeployment", name);
-        GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "//main-class", "com.junjie.xman.component." + GeneratorUtil.upperFirstCase(name) + "Component");
+        GeneratorUtil.replaceFileText(Paths.get("repository",name, "pom.xml"), "templateSequencerDeployment", name);
+        GeneratorUtil.replaceFileText(Paths.get("repository",name, "pom.xml"), "//main-class", "com.junjie.xman.component." + GeneratorUtil.upperFirstCase(name) + "Component");
         System.out.println("Please enter the component and port you want to connect in sequence(These component will be connected in order to execute). For example, comp1:12222;comp2:13333");
         String input = scanner.nextLine();
         String[] comps = input.split(";");

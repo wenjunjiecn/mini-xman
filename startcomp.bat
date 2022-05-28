@@ -1,1 +1,1 @@
-cd %1 && mvn compile exec:java
+cd ./repository/%1 && mvn compile exec:java

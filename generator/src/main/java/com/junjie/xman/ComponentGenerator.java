@@ -57,14 +57,15 @@ public class ComponentGenerator {
 
     private static void initializeNewComponent(String name) {
         System.out.println("The component (" + name + ") is creating....");
-        GeneratorUtil.copyDir("templateComponent", name);
-        Path filepath = Paths.get(System.getProperty("user.dir"), name, "src/main/java/com/junjie/xman/component/MyComponent.java");
+        GeneratorUtil.copyDir("./templates/templateComponent", Paths.get("repository",name).toString());
+        Path filepath = Paths.get(System.getProperty("user.dir"),"repository", name, "src/main/java/com/junjie/xman/component/MyComponent.java");
         File file = new File(String.valueOf(filepath));
-        Path newpath = Paths.get(System.getProperty("user.dir"), name, "src/main/java/com/junjie/xman/component", GeneratorUtil.upperFirstCase(name) + "Component.java");
+        Path newpath = Paths.get(System.getProperty("user.dir"), "repository",name, "src/main/java/com/junjie/xman/component", GeneratorUtil.upperFirstCase(name) + "Component.java");
         file.renameTo(new File(String.valueOf(newpath)));
+        System.out.println(file);
         GeneratorUtil.replaceFileText(newpath, "MyComponent", GeneratorUtil.upperFirstCase(name) + "Component");
-        GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "templateComponent", name);
-        GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "//main-class", "com.junjie.xman.component." + GeneratorUtil.upperFirstCase(name) + "Component");
+        GeneratorUtil.replaceFileText(Paths.get("repository",name, "pom.xml"), "templateComponent", name);
+        GeneratorUtil.replaceFileText(Paths.get("repository",name, "pom.xml"), "//main-class", "com.junjie.xman.component." + GeneratorUtil.upperFirstCase(name) + "Component");
         System.out.println("The component (" + name + ") have been created, Please go to the file under this path and add your own business code: " + newpath );
     }
 }

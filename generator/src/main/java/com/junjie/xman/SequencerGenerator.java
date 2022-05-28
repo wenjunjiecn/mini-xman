@@ -79,13 +79,13 @@ public class SequencerGenerator {
 
     private static void initialSeqComposite(String name, List<String> componentList, int[] component_indexs) {
         System.out.println("The sequencer compsite (" + name + ") is creating....");
-        GeneratorUtil.copyDir("templateSequencer", name);
-        Path filepath = Paths.get(System.getProperty("user.dir"), name, "src/main/java/com/junjie/xman/component/MySequencer.java");
+        GeneratorUtil.copyDir("./templates/templateSequencer", Paths.get("repository",name).toString());
+        Path filepath = Paths.get(System.getProperty("user.dir"),"repository", name, "src/main/java/com/junjie/xman/component/MySequencer.java");
         File file = new File(String.valueOf(filepath));
-        Path newpath = Paths.get(System.getProperty("user.dir"), name, "src/main/java/com/junjie/xman/component", GeneratorUtil.upperFirstCase(name) + "Component.java");
+        Path newpath = Paths.get(System.getProperty("user.dir"), "repository",name, "src/main/java/com/junjie/xman/component", GeneratorUtil.upperFirstCase(name) + "Component.java");
         file.renameTo(new File(String.valueOf(newpath)));
         GeneratorUtil.replaceFileText(newpath, "MySequencer", GeneratorUtil.upperFirstCase(name) + "Component");
-        GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "templateSequencer", name);
+        GeneratorUtil.replaceFileText(Paths.get("repository",name, "pom.xml"), "templateSequencer", name);
         List<String> codes = new ArrayList();
 
         for(int i = 0; i < component_indexs.length; ++i) {
@@ -117,8 +117,8 @@ public class SequencerGenerator {
 
         String added_dependencies = (String)dependencies.stream().filter(Objects::nonNull).collect(Collectors.joining("\n\t\t"));
 //        System.out.println(added_dependencies);
-        GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "<!--dependency-slot-->", added_dependencies);
-        GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), "//main-class", "com.junjie.xman.component." + GeneratorUtil.upperFirstCase(name) + "Component");
+        GeneratorUtil.replaceFileText(Paths.get("repository",name, "pom.xml"), "<!--dependency-slot-->", added_dependencies);
+        GeneratorUtil.replaceFileText(Paths.get("repository",name, "pom.xml"), "//main-class", "com.junjie.xman.component." + GeneratorUtil.upperFirstCase(name) + "Component");
         System.out.println("The sequencer composite (" + name + ") have been created, please going to " + newpath + " to add your own code.");
     }
 }

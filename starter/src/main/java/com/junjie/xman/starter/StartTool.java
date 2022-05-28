@@ -15,8 +15,8 @@ public class StartTool {
         final String name = scanner.nextLine();
         System.out.println("Please enter the port you want the part to run on:");
         int port = Integer.parseInt(scanner.nextLine());
-        String match_content = GeneratorUtil.matchFileContent(Paths.get(name, "pom.xml").toString(), "<argument>\\d*</argument>");
-        GeneratorUtil.replaceFileText(Paths.get(name, "pom.xml"), match_content, "<argument>" + port + "</argument>");
+        String match_content = GeneratorUtil.matchFileContent(Paths.get("repository",name, "pom.xml").toString(), "<argument>\\d*</argument>");
+        GeneratorUtil.replaceFileText(Paths.get("repository",name, "pom.xml"), match_content, "<argument>" + port + "</argument>");
         (new Thread() {
             public void run() {
                 String output = CMDUtil.excuteCMDCommand("cmd /k start startcomp.bat " + name);
